@@ -10,38 +10,44 @@ import "./App.css";
 
 
 function App() {
-    const [inputValue, setInputValue] = useState("")
-    const changeInput = e => {
-      
-      const value = e.target.value;
-       setInputValue(value);
-    };
-
+  const [searchImage, setSearchImage] = useState('')
   const [nasaImage, setNasaImage] = useState('')
-useEffect(() => {
-  axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2021-02-01')  
-  .then((response) =>{
-   setNasaImage(response.data.url)
-   console.log(response.data.url)
+  const [baseUrl] = useState(`https://api.nasa.gov/planetary/apod?api_key=Uncg5dOg9lyQK4LLYQ8WZ9AZGJuHL91iLjvKQQWQ&date=`) 
+  
+  const changeInput = e => {
+    const value = e.target.value;
+      setSearchImage(value);
+      
+  };
+
+  // const openDetails = 
+
+
+  useEffect(() => {
+    axios.get(`${baseUrl}${searchImage}`)  
+    .then((response) =>{
+    setNasaImage(response.data)
+    })
+    .catch((error) => {
+    console.log(error)
+    }, [searchImage])
   })
-  .catch((error) => {
-  console.log(error)
-  }, [])
-})
+
+
   return (
     <div className="App">
       <h1>Traverse The Heavens Below...</h1>
-      <img src={nasaImage} alt=""/>
-       <div className ="flex-container">
+      <h4>Title: {nasaImage.title}</h4>
+      <img src={nasaImage.url} alt="nasa"/>
+       
          <div>
-        <input id='input' type='text' onChange={changeInput} value = {inputValue}/> 
+        <input type='date' onChange={changeInput} value={searchImage}/> 
         </div>
-        <button className ='search'>Search</button>
-      <button className='surprise'>Surprise Me!</button>
+      <button onClick >Surprise Me!</button>
+      {/* <Details /> */}
       </div>
-    </div>
   );
-
+  
 }
 
 export default App;

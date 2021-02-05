@@ -22,3 +22,8 @@ img{
   justify-content: space-evenly; 
   padding-bottom: 2rem; 
 }
+
+.container{
+  border: 2px solid black; 
+  background-color: blue; 
+}
