@@ -33,17 +33,20 @@ function App() {
     }, [searchImage])
   })
 
-
+  
   return (
     <div className="App">
       <h1>Traverse The Heavens Below...</h1>
       <h4>Title: {nasaImage.title}</h4>
       <img src={nasaImage.url} alt="nasa"/>
+      <div className = 'description'>
+        <h4>Description</h4>
+        <p>{nasaImage.explanation}</p>
+      </div>
        
          <div>
         <input type='date' onChange={changeInput} value={searchImage}/> 
         </div>
-      <button onClick >Surprise Me!</button>
       {/* <Details /> */}
       </div>
   );
